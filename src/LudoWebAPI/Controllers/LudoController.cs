@@ -39,11 +39,17 @@ namespace LudoWebAPI.Controllers
         [HttpPost]
         public int Post()
         {
-            // find a gameid           
-            int GameID = 0;
+            // find a gameid
+            int gameID = 0;
 
-            _gameContainer.GetOrCreateGame(GameID);       
-            return GameID;
-        }     
+            if (_gameContainer.GetAllGames().Count() > 0)
+            {
+                gameID = _gameContainer.GetAllGames().Max() + 1;
+            }
+
+            _gameContainer.GetOrCreateGame(gameID);
+
+            return gameID;
+        }
     }
 }
