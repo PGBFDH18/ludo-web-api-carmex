@@ -11,7 +11,12 @@ namespace LudoWebAPI.Controllers
     [ApiController]
     public class LudoGameIDController : ControllerBase
     {
-      
+        private IGamesContainer _games;
+
+        public LudoGameIDController(IGamesContainer games)
+        {
+            _games = games;
+        }
         // GET: api/LudoGameID/5
         [HttpGet("{id}")]
         public string Get(int id)
