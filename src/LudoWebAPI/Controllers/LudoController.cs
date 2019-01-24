@@ -37,11 +37,13 @@ namespace LudoWebAPI.Controllers
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
-        public void Post([FromBody] int value)
+        public int Post()
         {
-            _gameContainer.GetOrCreateGame(value);
-        }
+            // find a gameid           
+            int GameID = 0;
 
-     
+            _gameContainer.GetOrCreateGame(GameID);       
+            return GameID;
+        }     
     }
 }
