@@ -11,12 +11,7 @@ namespace LudoWebAPI.Controllers
     [ApiController]
     public class PlayersPlayerIDController : ControllerBase
     {
-        // GET: api/PlayersPlayerID
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+       
 
         // GET: api/PlayersPlayerID/5
         [HttpGet("{id}", Name = "Get")]
@@ -24,12 +19,7 @@ namespace LudoWebAPI.Controllers
         {
             return "value";
         }
-
-        // POST: api/PlayersPlayerID
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+               
 
         // PUT: api/PlayersPlayerID/5
         [HttpPut("{id}")]
