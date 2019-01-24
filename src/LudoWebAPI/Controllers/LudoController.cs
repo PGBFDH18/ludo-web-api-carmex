@@ -33,7 +33,7 @@ namespace LudoWebAPI.Controllers
         // POST: api/Ludo
         /// <summary>
         /// Skapa ett nytt spel
-        /// Retunera inget
+        /// Retunerar spel id
         /// </summary>
         /// <param name="value"></param>
         [HttpPost]
