@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LudoGameEngine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LudoWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ludo")]
     [ApiController]
     public class LudoGameIDController : ControllerBase
     {
@@ -18,20 +19,27 @@ namespace LudoWebAPI.Controllers
             _games = games;
         }
 
-        // GET: api/LudoGameID/5
+        // GET: api/ludo/{gameid]}
         [HttpGet("{id}")]
-        public string Get(int id)
+        public JsonResult Get(int id)
         {
-            return "value";
+            var game = _games.GetOrCreateGame(id);
+
+            return new JsonResult(new {
+                id,
+                currentPlayerId = game.GetCurrentPlayer().PlayerId,
+                players = game.GetPlayers(),
+                pieces = game.GetAllPiecesInGame()
+            });
         }
 
-        // POST: api/LudoGameID
-        [HttpPost("{id}")]
-        public void Post(int id, [FromBody] string value)
+        // PUT: api/ludo/{gameid]}
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value)
         {
-        }      
+        }
 
-        // DELETE: api/ApiWithActions/5
+        // DELETE: api/ludo/{gameid]}
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
