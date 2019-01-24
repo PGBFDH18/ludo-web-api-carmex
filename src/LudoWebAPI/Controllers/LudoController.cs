@@ -39,9 +39,10 @@ namespace LudoWebAPI.Controllers
         [HttpPost]
         public int Post()
         {
-            // find a gameid           
+            // find a gameid som genererar nytt numer hela tiden?
             int GameID = 0;
 
+            //Kollar getorCreateGame om det redan finns ett sånt spelID?
             _gameContainer.GetOrCreateGame(GameID);       
             return GameID;
         }     
