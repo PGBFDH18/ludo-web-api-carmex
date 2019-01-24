@@ -12,11 +12,11 @@ namespace LudoWebAPI.Controllers
     [ApiController]
     public class LudoController : ControllerBase
     {
-        private IGamesContainer _games;
+        private IGamesContainer _gameContainer;
 
         public LudoController(IGamesContainer games)
         {
-            _games = games;
+            _gameContainer = games;
         }
 
         // GET: api/Ludo
@@ -27,7 +27,7 @@ namespace LudoWebAPI.Controllers
         [HttpGet]
         public IEnumerable<int> Get()
         {
-            return _games.GetAllGames();
+            return _gameContainer.GetAllGames();
         }
 
         // POST: api/Ludo
@@ -39,7 +39,7 @@ namespace LudoWebAPI.Controllers
         [HttpPost]
         public void Post([FromBody] int value)
         {
-            _games.GetOrCreateGame(value);
+            _gameContainer.GetOrCreateGame(value);
         }
 
      
