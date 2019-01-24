@@ -12,11 +12,11 @@ namespace LudoWebAPI.Controllers
     [ApiController]
     public class LudoController : ControllerBase
     {
-        private IGamesContainer _gameContainer;
+        private IGamesContainer _games;
 
         public LudoController(IGamesContainer games)
         {
-            _gameContainer = games;
+            _games = games;
         }
 
         // GET: api/Ludo
@@ -27,7 +27,7 @@ namespace LudoWebAPI.Controllers
         [HttpGet]
         public IEnumerable<int> Get()
         {
-            return _gameContainer.GetAllGames();
+            return _games.GetAllGames();
         }
 
         // POST: api/Ludo
@@ -43,12 +43,12 @@ namespace LudoWebAPI.Controllers
             int gameID = 0;
 
             //Om det finns spel innan, ta reda på dess högsta ID och räkna sedan upp med 1.
-            if (_gameContainer.GetAllGames().Count() > 0)
+            if (_games.GetAllGames().Count() > 0)
             {
-                gameID = _gameContainer.GetAllGames().Max() + 1;
+                gameID = _games.GetAllGames().Max() + 1;
             }
 
-            _gameContainer.GetOrCreateGame(gameID);
+            _games.GetOrCreateGame(gameID);
 
             return gameID;
         }

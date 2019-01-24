@@ -17,6 +17,7 @@ namespace LudoWebAPI.Controllers
         {
             _games = games;
         }
+
         // GET: api/LudoGameID/5
         [HttpGet("{id}")]
         public string Get(int id)
@@ -34,6 +35,7 @@ namespace LudoWebAPI.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+            _games.DeleteGame(id);
         }
     }
 }

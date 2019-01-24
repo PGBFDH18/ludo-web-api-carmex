@@ -29,5 +29,10 @@ namespace LudoWebAPI
         {
             return ludoGames.Select(d => d.Key).ToList();
         }
+
+        public void DeleteGame(int id)
+        {
+            ludoGames.Remove(id);
+        }
     }
 }
