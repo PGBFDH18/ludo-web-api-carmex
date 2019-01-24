@@ -42,6 +42,7 @@ namespace LudoWebAPI.Controllers
             // find a gameid
             int gameID = 0;
 
+            //Om det finns spel innan, ta reda på dess högsta ID och räkna sedan upp med 1.
             if (_gameContainer.GetAllGames().Count() > 0)
             {
                 gameID = _gameContainer.GetAllGames().Max() + 1;
