@@ -37,11 +37,21 @@ namespace LudoWebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
-           // anv. träningen för att uppdater en spleares position
+            // anv. träningen för att uppdater en spleares position
+            //hämta objektet piece från ludogame och döp den till 
+            //piece lokalt här för att kunna mova piece. 
+            var game = _games.GetOrCreateGame(id);
+            int playerIndex = 0; // <---- FIX
+            var player = game.GetPlayers()[playerIndex];
+            int pieceIndex = 0; // <--- FIX
+            var piece = player.Pieces[pieceIndex];
+
+            int moveDistance = 0; // <--- FIX
+            game.MovePiece(player, piece.PieceId, moveDistance);
         }
 
-        // DELETE: api/ludo/{gameid]}
-        [HttpDelete("{id}")]
+    // DELETE: api/ludo/{gameid]}
+    [HttpDelete("{id}")]
         public void Delete(int id)
         {
             _games.DeleteGame(id);
