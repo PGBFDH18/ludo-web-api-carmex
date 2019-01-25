@@ -37,6 +37,10 @@ namespace LudoWebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+            //Ändra placering på en pjäs
+            //Ändra placering på en pjäs
+            //Ändra placering på en pjäs
+
         }
 
         // DELETE: api/ludo/{gameid]}

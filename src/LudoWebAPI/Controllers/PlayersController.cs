@@ -22,6 +22,10 @@ namespace LudoWebAPI.Controllers
         [HttpGet]
         public IEnumerable<string> Get()
         {
+            //List med alla spelera i spelet
+            //List med alla spelera i spelet
+            //List med alla spelera i spelet
+
             return new string[] { "value1", "value2" };
         }
 
