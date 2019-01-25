@@ -36,21 +36,14 @@ namespace LudoWebAPI.Controllers
         /// Retunerar spel id
         /// </summary>
         /// <param name="value"></param>
+        /// 
+
         [HttpPost]
-        public int Post()
+        public void Post([FromBody] int value)
         {
-            // find a gameid
-            int gameID = 0;
-
-            //Om det finns spel innan, ta reda på dess högsta ID och räkna sedan upp med 1.
-            if (_games.GetAllGames().Count() > 0)
-            {
-                gameID = _games.GetAllGames().Max() + 1;
-            }
-
-            _games.GetOrCreateGame(gameID);
-
-            return gameID;
+            _gameContainer.GetOrCreateGame(value);
         }
+
+     
     }
 }
