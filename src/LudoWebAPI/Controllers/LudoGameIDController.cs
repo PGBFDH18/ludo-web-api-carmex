@@ -37,6 +37,7 @@ namespace LudoWebAPI.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
+           // anv. träningen för att uppdater en spleares position
         }
 
         // DELETE: api/ludo/{gameid]}
