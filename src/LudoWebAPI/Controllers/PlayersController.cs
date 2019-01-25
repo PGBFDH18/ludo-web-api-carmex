@@ -19,8 +19,8 @@ namespace LudoWebAPI.Controllers
             _games = games;
         }
         // GET: api/ludo/{gameid}/players
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{gameid}/players")]
+        public IEnumerable<string> Get(int gameId)
         {
             //List med alla spelera i spelet
             //List med alla spelera i spelet
