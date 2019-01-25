@@ -36,7 +36,8 @@ namespace LudoWebAPI.Controllers
         // PUT: api/ludo/{gameid]}
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
-        {
+        { 
+
         }
 
         // DELETE: api/ludo/{gameid]}
