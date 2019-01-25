@@ -12,11 +12,11 @@ namespace LudoWebAPI.Controllers
     [ApiController]
     public class LudoController : ControllerBase
     {
-        private IGamesContainer _gameContainer;
+        private IGamesContainer _games;
 
         public LudoController(IGamesContainer games)
         {
-            _gameContainer = games;
+            _games = games;
         }
 
         // GET: api/Ludo
@@ -27,13 +27,13 @@ namespace LudoWebAPI.Controllers
         [HttpGet]
         public IEnumerable<int> Get()
         {
-            return _gameContainer.GetAllGames();
+            return _games.GetAllGames();
         }
 
         // POST: api/Ludo
         /// <summary>
         /// Skapa ett nytt spel
-        /// Retunera inget
+        /// Retunerar spel id
         /// </summary>
         /// <param name="value"></param>
         /// 
@@ -43,6 +43,7 @@ namespace LudoWebAPI.Controllers
         {
             _gameContainer.GetOrCreateGame(value);
         }
+
      
     }
 }
