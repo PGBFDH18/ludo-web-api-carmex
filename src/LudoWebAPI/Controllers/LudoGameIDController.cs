@@ -19,38 +19,99 @@ namespace LudoWebAPI.Controllers
             _games = games;
         }
 
-        // GET: api/ludo/{gameid]}
+        // GET: api/ludo/{id]}
         [HttpGet("{id}")]
         public JsonResult Get(int id)
         {
-            var game = _games.GetOrCreateGame(id);
+            LudoGame game = _games.GetOrCreateGame(id);
 
-            return new JsonResult(new {
+            return new JsonResult(new
+            {
                 id,
-                currentPlayerId = game.GetCurrentPlayer().PlayerId,
+                currentPlayer = game.GetCurrentPlayer(),
                 players = game.GetPlayers(),
                 pieces = game.GetAllPiecesInGame()
             });
         }
 
-        // PUT: api/ludo/{gameid]}
+        // PUT: api/ludo/{id]}
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public JsonResult Put(int id)
         {
-            // anv. träningen för att uppdater en spleares position
-            //hämta objektet piece från ludogame och döp den till 
-            //piece lokalt här för att kunna mova piece. 
-            var game = _games.GetOrCreateGame(id);
-            int playerIndex = 0; // <---- FIX
-            var player = game.GetPlayers()[playerIndex];
-            int pieceIndex = 0; // <--- FIX
-            var piece = player.Pieces[pieceIndex];
+            LudoGame game = _games.GetOrCreateGame(id);
 
-            int moveDistance = 0; // <--- FIX
-            game.MovePiece(player, piece.PieceId, moveDistance);
+            if (game.GetGameState() == GameState.Ended)
+            {
+                // Retunera spelaren vann
+                return new JsonResult(
+                    new
+                    {
+                        winner = game.GetWinner()
+                    });
+            }
+
+            // kontrollera att spelet har startat första gången någon flyttar en pjäs, annars starta spelet först
+            if (game.GetGameState() == GameState.NotStarted)
+            {
+                game.StartGame();
+            }
+
+            // Hämta nuvarande spelare
+            Player player = game.GetCurrentPlayer();
+
+            // Kasta tärningen
+            int diece = game.RollDiece();
+
+            // hämta första pjäsen från spelaren som är på målsträckan
+            Piece piece = player.Pieces.FirstOrDefault(m => m.State == PieceGameState.GoalPath);
+
+            // om ingen pjäs är på målsträckan, ta en som är på spel planen istället
+            if (piece == null)
+            {
+                piece = player.Pieces.FirstOrDefault(m => m.State == PieceGameState.InGame);
+            }
+
+            // om ingen pjäs är på spelplanen, ta en från boet
+            if (piece == null)
+            {
+                piece = player.Pieces.FirstOrDefault(m => m.State == PieceGameState.HomeArea);
+            }
+
+            // vi har en pjäs som spelaren kan flytta
+            if (piece != null)
+            {
+                game.MovePiece(player, piece.PieceId, diece);
+            }
+
+            // Avsluta spelarens tur, om hen slår sex, får de spela om
+            if (diece != 6)
+            {
+                game.EndTurn(player);
+            }
+              
+            // kontrollera om någon vunnit eller ej
+            if (game.GetGameState() != GameState.Ended)
+            {
+                // Retunera spelaren som spelade, så man kan se pjäsen flyttat på sig
+                return new JsonResult(
+                    new
+                    {
+                        piece,
+                        player
+                    });
+            }
+            else
+            {
+                // Retunera spelaren vann
+                return new JsonResult(
+                    new
+                    {
+                        winner = game.GetWinner()
+                    });
+            }
         }
 
-        // DELETE: api/ludo/{gameid]}
+        // DELETE: api/ludo/{id]}
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
