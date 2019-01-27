@@ -123,7 +123,7 @@ namespace LudoGameEngine
             }
 
             var piece = player.Pieces.First(p => p.PieceId == pieceId);
-
+             
             if (piece.State == PieceGameState.Goal)
             {
                 throw new Exception("Piece is in Goal and unable to move");

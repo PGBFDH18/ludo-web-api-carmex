@@ -36,8 +36,9 @@ namespace LudoWebAPI.Controllers
         [HttpPost("{id}/players")]
         public JsonResult Post(int id, string name, int color)
         {
+
             // hämtar spelet där spelaren skall skapas
-            LudoGame game = _games.GetOrCreateGame(id);
+            LudoGame game = _games.GetOrCreateGame(gameid);
 
             // lägg till en ny spelare till spelet
             Player player = game.AddPlayer(name, (PlayerColor) color);
