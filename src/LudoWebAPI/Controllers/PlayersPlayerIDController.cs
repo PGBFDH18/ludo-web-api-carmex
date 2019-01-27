@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LudoGameEngine;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,14 @@ namespace LudoWebAPI.Controllers
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
-            return "value";
+            var game = _games.GetOrCreateGame(id);
+           var currentPlayerId = game.GetCurrentPlayer().PlayerId;
+
+            game.GetPlayers();
+
+           
+
+            return "";
         }
                
 
