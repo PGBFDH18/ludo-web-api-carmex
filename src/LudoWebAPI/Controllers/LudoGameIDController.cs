@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LudoWebAPI.Controllers
-{
+{   // Kolla så routern är rätt här?
     [Route("api/ludo")]
     [ApiController]
     public class LudoGameIDController : ControllerBase

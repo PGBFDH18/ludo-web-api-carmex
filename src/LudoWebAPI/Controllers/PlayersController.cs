@@ -18,23 +18,29 @@ namespace LudoWebAPI.Controllers
         {
             _games = games;
         }
+        //List med alla spelera i spelet
         // GET: api/ludo/{gameid}/players
         [HttpGet("{gameid}/players")]
-        public IEnumerable<string> Get(int gameId)
+        public JsonResult Get(int gameId)
         {
-            //List med alla spelera i spelet
-            //List med alla spelera i spelet
-            //List med alla spelera i spelet
+            // Ta gameId för att leta reda på vilket spel det är
+            // Gör en getorcreateGame på det spelID
+            LudoGame game = _games.GetOrCreateGame(gameId);            
 
-            return new string[] { "value1", "value2" };
+            // komma åt spelarna via getPlayers 
+            var players = game.GetPlayers();
+
+           //returnerar alla objekt
+            return new JsonResult(players);
         }
 
         // POST: api/ludo/{gameid}/players
-        [HttpPost("{gameid}/players")]
-        public JsonResult Post(int id, string name, int color)
+        [HttpPost("{gameid}/players/")]
+        public JsonResult Post(int gameid, string name, int color)
         {
+
             // hämtar spelet där spelaren skall skapas
-            LudoGame game = _games.GetOrCreateGame(id);
+            LudoGame game = _games.GetOrCreateGame(gameid);
 
             // lägg till en ny spelare till spelet
             Player player = game.AddPlayer(name, (PlayerColor) color);
