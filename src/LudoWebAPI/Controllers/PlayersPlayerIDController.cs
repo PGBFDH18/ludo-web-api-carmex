@@ -19,25 +19,35 @@ namespace LudoWebAPI.Controllers
             _games = games;
         }
 
-        // GET: api/PlayersPlayerID/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/ludo/3/players/1
+        [HttpGet("{gameId}/players/{playerid}")]
+        public JsonResult Get(int gameId, int playerId)
         {
-            var game = _games.GetOrCreateGame(id);
-            var currentPlayerId = game.GetCurrentPlayer().PlayerId;
+            var game = _games.GetOrCreateGame(gameId);
+           
+            //tar ut den spelaren som har just detta id, player blir då ett objekt
+            Player player = game.GetPlayers().Single(m => m.PlayerId == playerId);
 
-            game.GetPlayers();
-
-
-
-            return "";
+            //gö om detta till en JSON
+            return new JsonResult(player);
         }
 
 
-        // PUT: api/PlayersPlayerID/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        // PUT: api/ludo/3/players/1
+        [HttpPut("{gameId}/players/{playerid}")]
+        public JsonResult Put(int gameId, int playerId, int color, string name)
         {
+            //hämtat ett spel som har de Id
+            LudoGame game = _games.GetOrCreateGame(gameId);
+
+            //tar ut den spelaren som har just detta id, player blir då ett objekt
+            Player player = game.GetPlayers().Single(m => m.PlayerId == playerId);
+
+            player.PlayerColor = (PlayerColor)color;
+
+            player.Name = name;
+
+            return new JsonResult(player);
         }
 
         // DELETE: api/ludo/gameId/players/{playerId}
@@ -46,6 +56,7 @@ namespace LudoWebAPI.Controllers
         {
             LudoGame game = _games.GetOrCreateGame(gameId);
 
+            //tar ut den spelaren som har just detta id
             Player player = game.GetPlayers().Single(m => m.PlayerId == playerId);
 
             game.DeletePlayer(player);
