@@ -19,26 +19,26 @@ namespace LudoWebAPI.Controllers
             _games = games;
         }
 
-        // GET: api/ludo/{id]}
-        [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        // GET: api/ludo/{gameId}
+        [HttpGet("{gameId}")]
+        public JsonResult Get(int gameId)
         {
-            LudoGame game = _games.GetOrCreateGame(id);
+            LudoGame game = _games.GetOrCreateGame(gameId);
 
             return new JsonResult(new
             {
-                id,
+                gameId,
                 currentPlayer = game.GetCurrentPlayer(),
                 players = game.GetPlayers(),
                 pieces = game.GetAllPiecesInGame()
             });
         }
 
-        // PUT: api/ludo/{id]}
-        [HttpPut("{id}")]
-        public JsonResult Put(int id)
+        // PUT: api/ludo/{gameid}
+        [HttpPut("{gameId}")]
+        public JsonResult Put(int gameId)
         {
-            LudoGame game = _games.GetOrCreateGame(id);
+            LudoGame game = _games.GetOrCreateGame(gameId);
 
             if (game.GetGameState() == GameState.Ended)
             {
@@ -96,6 +96,7 @@ namespace LudoWebAPI.Controllers
                 return new JsonResult(
                     new
                     {
+                        diece,
                         piece,
                         player
                     });
@@ -111,11 +112,11 @@ namespace LudoWebAPI.Controllers
             }
         }
 
-        // DELETE: api/ludo/{id]}
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE: api/ludo/{gameid}
+        [HttpDelete("{gameId}")]
+        public void Delete(int gameId)
         {
-            _games.DeleteGame(id);
+            _games.DeleteGame(gameId);
         }
     }
 }
