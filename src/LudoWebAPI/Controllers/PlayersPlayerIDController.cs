@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LudoWebAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/ludo")]
     [ApiController]
     public class PlayersPlayerIDController : ControllerBase
     {
@@ -24,15 +24,15 @@ namespace LudoWebAPI.Controllers
         public string Get(int id)
         {
             var game = _games.GetOrCreateGame(id);
-           var currentPlayerId = game.GetCurrentPlayer().PlayerId;
+            var currentPlayerId = game.GetCurrentPlayer().PlayerId;
 
             game.GetPlayers();
 
-           
+
 
             return "";
         }
-               
+
 
         // PUT: api/PlayersPlayerID/5
         [HttpPut("{id}")]
@@ -40,10 +40,17 @@ namespace LudoWebAPI.Controllers
         {
         }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
+        // DELETE: api/ludo/gameId/players/{playerId}
+        [HttpDelete("{gameId}/players/{playerid}")]
+        public JsonResult Delete(int gameId, int playerId)
         {
+            LudoGame game = _games.GetOrCreateGame(gameId);
+
+            Player player = game.GetPlayers().Single(m => m.PlayerId == playerId);
+
+            game.DeletePlayer(player);
+
+            return new JsonResult(game.GetPlayers());
         }
     }
 }
