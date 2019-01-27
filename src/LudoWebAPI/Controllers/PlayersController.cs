@@ -38,7 +38,7 @@ namespace LudoWebAPI.Controllers
         {
 
             // hämtar spelet där spelaren skall skapas
-            LudoGame game = _games.GetOrCreateGame(gameid);
+            LudoGame game = _games.GetOrCreateGame(id);
 
             // lägg till en ny spelare till spelet
             Player player = game.AddPlayer(name, (PlayerColor) color);
