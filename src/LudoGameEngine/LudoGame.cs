@@ -36,7 +36,7 @@ namespace LudoGameEngine
 
             Player player = new Player()
             {
-                PlayerId = _players.Count(),
+                PlayerId = _players.Any() ? _players.Max(m => m.PlayerId) + 1 : 0,
                 Name = name,
                 PlayerColor = color,
                 Pieces = new Piece[]
@@ -51,6 +51,13 @@ namespace LudoGameEngine
             _players.Add(player);
 
             return player;
+        }
+
+        public void DeletePlayer(Player player)
+        {
+            _players.Remove(player);
+
+            currentPlayerId = _players.Min(m => m.PlayerId);
         }
 
         public void EndTurn(Player player)
