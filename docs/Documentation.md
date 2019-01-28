@@ -48,6 +48,3 @@ Ludo user stories
 
 
 
-
-![Det är våran API](API.PNG)
-
