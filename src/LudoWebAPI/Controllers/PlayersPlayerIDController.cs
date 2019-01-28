@@ -23,14 +23,15 @@ namespace LudoWebAPI.Controllers
         [HttpGet("{id}", Name = "Get")]
         public string Get(int id)
         {
-            var game = _games.GetOrCreateGame(id);
-           var currentPlayerId = game.GetCurrentPlayer().PlayerId;
+            Player newPlayer = new Player();
 
-            game.GetPlayers();
+           var test = newPlayer.PlayerId.ToString();
+            LudoGame bajs = new LudoGame();
+            var fittunge = bajs._players;
 
-           
+                 return "{id}"; 
 
-            return "";
+
         }
                
 

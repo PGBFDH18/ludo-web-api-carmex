@@ -7,7 +7,7 @@ namespace LudoGameEngine
 {
     public class LudoGame : ILudoGame
     {
-        private List<Player> _players = new List<Player>();
+        public List<Player> _players = new List<Player>();
         private GameState _gameState = GameState.NotStarted;
         private int currentPlayerId = 0;
         private IDiece _diece = null;
@@ -15,6 +15,11 @@ namespace LudoGameEngine
         public LudoGame(IDiece diece)
         {
             _diece = diece;
+        }
+
+        public LudoGame()
+        {
+            
         }
 
         public Player AddPlayer(string name, PlayerColor color)
