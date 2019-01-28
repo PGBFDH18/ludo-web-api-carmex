@@ -44,3 +44,10 @@ Ludo user stories
 **/ludo{gameId}** *(Ta bort ett spel)*
 
 **/ludo{gameId}/Players/{playersId}** *(Ta bort spelaren)*
+
+
+
+
+
+![Det är våran API](API.PNG)
+
