@@ -46,5 +46,6 @@ Ludo user stories
 **/ludo{gameId}/Players/{playersId}** *(Ta bort spelaren)*
 
 
+![API beskrivning](https://github.com/PGBFDH18/ludo-web-api-carmex/blob/master/docs/API.PNG)
 
 
