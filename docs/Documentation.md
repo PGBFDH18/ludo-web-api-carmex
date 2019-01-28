@@ -18,6 +18,7 @@ Ludo user stories
 **/ludo/{gameId}/players/{playerid}**
 
 **GET**
+
 **/ludo** *(Lista av spelen)*
 
 **/ludo{gameId}** *(Info om specifikt spel)*
@@ -27,16 +28,19 @@ Ludo user stories
 **/ludo/{gameId}/players/{playersId}** *(Detaljer om spelaren)*
 
 **POST**
-**/ludo** *(kapa ett nytt spel)*
+
+**/ludo** *(skapa ett nytt spel)*
 
 **/ludo{gameId}/players** *(Lägg till en ny spelare till spelet)*
 
 **PUT**
+
 **/ludo[{gameId}** *(Ändra en placerning på en pjäs)*
 
 **/ludo{gameId}/players/{playersId}** *(Ändra namn elLer färg på spelaren)*
 
 **DELETE**
+
 **/ludo{gameId}** *(Ta bort ett spel)*
 
 **/ludo{gameId}/Players/{playersId}** *(Ta bort spelaren)*
