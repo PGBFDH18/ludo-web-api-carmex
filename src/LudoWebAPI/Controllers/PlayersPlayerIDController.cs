@@ -23,7 +23,7 @@ namespace LudoWebAPI.Controllers
         [HttpGet("{gameId}/players/{playerid}")]
         public JsonResult Get(int gameId, int playerId)
         {
-            var game = _games.GetOrCreateGame(gameId);
+            LudoGame game = _games.GetOrCreateGame(gameId);
            
             //tar ut den spelaren som har just detta id, player blir då ett objekt
             Player player = game.GetPlayers().Single(m => m.PlayerId == playerId);
