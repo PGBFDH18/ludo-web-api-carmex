@@ -49,3 +49,5 @@ Ludo user stories
 ![API beskrivning](https://github.com/PGBFDH18/ludo-web-api-carmex/blob/master/docs/API.PNG)
 
 
+Vi har utgått från Stephan Kaas Johansen GameEnginge, samt API beskrvining. För att skriva reseterande delar av API:et har vi tagit hjälp av sidor via google så som stackoverflow, microsoft docs mfl. 
+
