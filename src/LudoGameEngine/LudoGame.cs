@@ -7,6 +7,12 @@ namespace LudoGameEngine
 {
     public class LudoGame : ILudoGame
     {
+        //propertie som man använder den privata variabeln publikt 
+        public GameState GameState
+        {
+            get { return _gameState; }
+            set { _gameState = value; }
+        }
         public List<Player> _players = new List<Player>();
         private GameState _gameState = GameState.NotStarted;
         private int currentPlayerId = 0;
