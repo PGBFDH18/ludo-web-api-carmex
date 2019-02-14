@@ -28,6 +28,7 @@ namespace LudoWebAPI.Controllers
             return new JsonResult(new
             {
                 gameId,
+                gameState = game.GameState,
                 currentPlayer = game.GetCurrentPlayer(),
                 players = game.GetPlayers(),
                 pieces = game.GetAllPiecesInGame()
