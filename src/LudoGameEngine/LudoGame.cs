@@ -24,16 +24,6 @@ namespace LudoGameEngine
 
         public Player AddPlayer(string name, PlayerColor color)
         {
-            if (_gameState != GameState.NotStarted)
-            {
-                throw new Exception($"Unable to add player since game is {_gameState}");
-            }
-
-            if (_players.Where(p => p.PlayerColor == color).Count() > 0)
-            {
-                return null;
-            }
-
             Player player = new Player()
             {
                 PlayerId = _players.Any() ? _players.Max(m => m.PlayerId) + 1 : 0,

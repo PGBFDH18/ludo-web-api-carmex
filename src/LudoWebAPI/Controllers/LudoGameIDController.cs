@@ -36,7 +36,7 @@ namespace LudoWebAPI.Controllers
 
         // PUT: api/ludo/{gameid}
         [HttpPut("{gameId}")]
-        public JsonResult Put(int gameId)
+        public ActionResult Put(int gameId)
         {
             LudoGame game = _games.GetOrCreateGame(gameId);
 
@@ -53,6 +53,12 @@ namespace LudoWebAPI.Controllers
             // kontrollera att spelet har startat första gången någon flyttar en pjäs, annars starta spelet först
             if (game.GetGameState() == GameState.NotStarted)
             {
+                //Skickar fel tillbaka om det är för få spelare
+                if (game.GetPlayers().Count() < 2)
+                {
+                    return BadRequest($"Can not start game, minimum 2 players");
+                }
+
                 game.StartGame();
             }
 
@@ -63,7 +69,7 @@ namespace LudoWebAPI.Controllers
             int diece = game.RollDiece();
 
             // hämta första pjäsen från spelaren som är på målsträckan
-            Piece piece = player.Pieces.FirstOrDefault(m => m.State == PieceGameState.GoalPath);
+           Piece piece = player.Pieces.FirstOrDefault(m => m.State == PieceGameState.GoalPath);
 
             // om ingen pjäs är på målsträckan, ta en som är på spel planen istället
             if (piece == null)
